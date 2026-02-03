@@ -22,12 +22,12 @@ A **CLI tool** for running interactive fiction files from the command line.
 ## Quick Start
 
 ```bash
-# Install
+# Install (downloads inklecate automatically)
 cd calligrapher
 npm install
 npm run build
 
-# Run a text adventure (works immediately!)
+# Run a text adventure
 ./bin/calligrapher.js simple.txt
 
 # Run an Ink story (auto-compiles)
@@ -46,11 +46,16 @@ npm run build
 ## Installation
 
 ```bash
-# Clone and build
+# Clone
 git clone <your-repo>
 cd calligrapher
+
+# Install & setup (downloads inklecate)
 npm install
+
+# Build TypeScript
 npm run build
+```
 
 # Install globally (optional)
 npm link
@@ -104,8 +109,20 @@ npm link
 |--------|-------------|------------------|
 | `.txt` | Text adventures | ✅ Yes |
 | `.md` | Markdown stories | ✅ Yes |
-| `.ink` | Ink source files | ✅ Yes (bundled inklecate) |
+| `.ink` | Ink source files | ⚠️ Requires `npm install` |
 | `.json` | Compiled Ink stories | ✅ Yes |
+
+## Ink (.ink) Files
+
+After running `npm install`, the inklecate compiler is automatically downloaded:
+- **inkjs v2.3.2** included
+- **inklecate v1.2.0** (runs postinstall)
+- **Auto-compilation** when running `.ink` files
+
+If the download fails, run manually:
+```bash
+npm run setup
+``` |
 
 ## Ink (.ink) Files
 
@@ -180,21 +197,40 @@ calligrapher/
 
 ## Troubleshooting
 
+### "inklecate compiler not found"
+
+Run the setup script:
+```bash
+npm run setup
+```
+
+### Download script fails with GitHub API error
+
+Wait a few minutes and retry, or download manually:
+```bash
+# Download from https://github.com/inkle/ink/releases/latest
+# Extract inklecate to bin/
+```
+
 ### "Story Complete" appears immediately
 
-- Ensure you are using the bundled inklecate (check `./bin/inklecate`)
-- Rebuild the project: `npm run clean && npm run build`
-
-### inklecate not found
-
-The bundled inklecate should work automatically. If not:
+Rebuild the project:
 ```bash
-chmod +x ./bin/inklecate
+npm run clean && npm run build
 ```
 
 ### Interactive mode not working
 
 Ensure your terminal supports ANSI escape codes and arrow key navigation.
+
+## Scripts
+
+| Script | Purpose |
+|--------|---------|
+| `npm run setup` | Download inklecate |
+| `npm run build` | Compile TypeScript |
+| `npm run clean` | Clean build artifacts |
+| `npm run dev` | Run in dev mode |
 
 ## Development
 
@@ -205,11 +241,35 @@ npm install
 # Build TypeScript
 npm run build
 
+# Re-download inklecate
+npm run setup
+
 # Clean build files
 npm run clean
 
 # Run in development mode
 npm run dev
+```
+
+## Project Structure
+
+```
+calligrapher/
+├── bin/
+│   ├── calligrapher.js      # CLI entry point
+│   └── inklecate            # Ink compiler (downloaded by scripts/)
+├── scripts/
+│   └── download-inklecate.js  # Setup script
+├── src/
+│   ├── index.ts             # Main entry point
+│   ├── args.ts              # Argument parsing
+│   ├── cli.ts               # TUI implementation
+│   └── compiler.ts          # Ink compilation
+├── simple.txt               # Sample text adventure
+├── test-story.ink          # Test story
+├── test-story.json          # Compiled test story (auto-generated)
+├── package.json
+└── README.md
 ```
 
 ## License
