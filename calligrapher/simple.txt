@@ -1,0 +1,53 @@
+=== start ===
+You stand at the entrance of an ancient cave. Legends speak of treasure within.
+The air is cold and carries whispers of forgotten adventures.
+
+* [Enter the cave] -> enter_cave
+* [Look around outside] -> outside_search
+* [Leave this place] -> leave
+
+=== enter_cave ===
+The cave is dark. Your torch flickers, casting dancing shadows on the walls.
+Ancient symbols glow faintly in the darkness.
+
+* [Follow the symbols] -> follow_symbols
+* [Walk into the darkness] -> darkness
+* [Exit the cave] -> start
+
+=== follow_symbols ===
+The symbols lead you deeper. They tell a story of a great dragon...
+Suddenly, you emerge into a treasure chamber filled with gold!
+
+✨ VICTORY! You found the treasure! ✨
+
+* [Play again] -> start
+
+=== darkness ===
+You stumble in the darkness and fall into a pit!
+
+☠️ GAME OVER
+
+* [Try again] -> start
+
+=== outside_search ===
+You search the area and find an old map tucked in a crevice!
+The map shows a secret passage to the treasure...
+
+* [Use the secret passage] -> secret_passage
+* [Return to the cave entrance] -> start
+
+=== secret_passage ===
+Following the map, you find a hidden tunnel...
+It leads directly to the dragon's treasure hoard!
+
+👑 VICTORY! The secret path worked! 👑
+
+* [Play again] -> start
+
+=== leave ===
+Fear grips your heart. You decide adventure isn't for you.
+The treasure remains hidden forever...
+
+🏁 THE END - COWARD'S PATH 🏁
+
+* [Play again] -> start

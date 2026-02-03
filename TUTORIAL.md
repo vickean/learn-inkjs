@@ -81,11 +81,11 @@ cd rpg-ink-tutorial
 
 ### Step 1: Initialize React Project
 
-We'll use Create React App with TypeScript for our frontend:
+We'll use **Vite** for our frontend - it's significantly faster than Create React App and has become the industry standard for modern React development:
 
 ```bash
-# Create new React project with TypeScript
-npx create-react-app rpg-frontend --template typescript
+# Create new React project with TypeScript using Vite
+npm create vite@latest rpg-frontend -- --template react-ts
 
 # Navigate to project directory
 cd rpg-frontend
@@ -94,15 +94,21 @@ cd rpg-frontend
 npm install inkjs
 
 # Install additional dependencies
-npm install react-router-dom uuid
+npm install react-router-dom uuid @types/uuid
 ```
 
-**Alternative using Vite (faster):**
+**Alternative using Create React App (legacy):**
 ```bash
-npm create vite@latest rpg-frontend -- --template react-ts
+npx create-react-app rpg-frontend --template typescript
 cd rpg-frontend
-npm install inkjs react-router-dom uuid @types/uuid
+npm install inkjs react-router-dom uuid
 ```
+
+**Note:** Vite is recommended because it provides:
+- 10-100x faster development server startup
+- Instant HMR (Hot Module Replacement)
+- Modern build tooling
+- Smaller production bundles
 
 ### Step 2: Project Structure
 
@@ -140,23 +146,20 @@ rpg-frontend/
 └── README.md
 ```
 
-### Step 3: Webpack Configuration (if needed)
+### Step 3: Vite Configuration (if needed)
 
-If you're loading .ink files directly, configure Webpack to handle them:
+If you're loading .ink files directly, configure Vite to handle them:
 
 ```javascript
-// webpack.config.js
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.ink$/i,
-        type: 'asset/source',
-      },
-    ],
-  },
-};
+// vite.config.ts
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  assetsInclude: ['**/*.ink'],
+});
 ```
+
+**Note:** When using Vite, .ink files in the public folder are served as static assets and don't require special configuration.
 
 **Source:** [inkjs Webpack Documentation](https://github.com/y-lohse/inkjs/blob/main/docs/working-with-typescript-and-webpack.md)
 
